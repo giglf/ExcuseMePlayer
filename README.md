@@ -27,6 +27,12 @@ Here are some basic ideas about this software:
 
 **Doufm API usage**
 
+https://github.com/DouFM/wang_fm/blob/master/doc/api.md
+
+---
+
+**My normal use**
+
 1. Get Playlist by access 
 
    http://doufm.info/api/playlist/
