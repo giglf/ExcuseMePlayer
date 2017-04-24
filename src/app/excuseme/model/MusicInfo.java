@@ -1,5 +1,7 @@
 package app.excuseme.model;
 
+import com.google.gson.JsonObject;
+
 /**
  * 
  * 封装的单首歌曲的信息</br>
@@ -31,6 +33,21 @@ public class MusicInfo {
 	private String title;			//歌曲名
 	private String upload_date;		//上传时间
 	
+	
+	public MusicInfo(){}
+	
+	public MusicInfo(JsonObject jsonObject){
+		album = jsonObject.get("album").getAsString();
+		artist = jsonObject.get("artist").getAsString();
+		audio = jsonObject.get("audio").getAsString();
+		company = jsonObject.get("company").getAsString();
+		cover = jsonObject.get("cover").getAsString();
+		kbps = jsonObject.get("kbps").getAsString();
+		key = jsonObject.get("key").getAsString();
+		public_time = jsonObject.get("public_time").getAsString();
+		title = jsonObject.get("title").getAsString();
+		upload_date = jsonObject.get("upload_date").getAsString();
+	}
 	
 	public String getAlbum() {
 		return album;

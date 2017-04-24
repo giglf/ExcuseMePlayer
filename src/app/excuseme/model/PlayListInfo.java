@@ -1,5 +1,7 @@
 package app.excuseme.model;
 
+import com.google.gson.JsonObject;
+
 /**
  * Doufm的api中包含了11个频道</br>
  * 此处对这些频道的信息进行封装</br>
@@ -16,6 +18,14 @@ public class PlayListInfo {
 	private String music_list;		//该电台频道中的歌曲总数
 	private String name;			//该电台频道的名称
 	
+	
+	public PlayListInfo(){}
+	
+	public PlayListInfo(JsonObject jsonObject){
+		key = jsonObject.get("key").getAsString();
+		music_list = jsonObject.get("music_list").getAsString();
+		name = jsonObject.get("name").getAsString();
+	}
 	
 	public String getKey() {
 		return key;
