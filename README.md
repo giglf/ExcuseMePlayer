@@ -80,3 +80,27 @@ https://github.com/DouFM/wang_fm/blob/master/doc/api.md
 
     http://doufm.info/#key=537c59881d41c83a88b67032
 
+
+
+
+---
+
+**About lyric**
+
+The music lyric use the gecimi(歌词迷) api.
+
+Official document http://doc.gecimi.com/en/latest/#indices-and-tables
+
+However, there are something error in the api using.
+
+At first, we can get the lyric information by `http://gecimi.com/api/lyric/:song` .
+
+Then response the url of the lrc file by json.
+
+Like this `http://s.gecimi.com/lrc/344/34435/3443588.lrc`
+
+But you will get 404 not found if you access it.
+
+Then I found the reason is the domain of `s.gecimi.com` ought to be `s.geci.me`
+
+When using this api should look out that.
