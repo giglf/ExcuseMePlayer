@@ -1,12 +1,14 @@
+package app.excuseme.network;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
 import com.google.gson.Gson;
-import sun.net.www.protocol.http.HttpURLConnection;
+import java.net.HttpURLConnection;
 import app.excuseme.model.*;
 import app.excuseme.util.*;
+
 public class RequestMusic {
 	static Gson gson=new Gson();
 	public Reader doGet(String url)throws Exception
@@ -39,6 +41,7 @@ public class RequestMusic {
 		musicInfo=gson.fromJson(doGet(Constants.MUSIC_URL+"?title="+title+"&kbps="+kbps), MusicInfo[].class);
 		return musicInfo;
 	}
+	
 	public MusicInfo[] searchMusic(int start,int end)throws Exception
 	{
 		MusicInfo[] musicInfo;
