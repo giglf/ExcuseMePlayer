@@ -1,0 +1,31 @@
+#TopItem{
+	-fx-background-image: url(../image/ly.jpg);
+	-fx-background-size: stretch stretch;
+    -fx-background-position: center center;
+
+}
+#center{
+	-fx-background-image: url(../image/music.jpg);
+	-fx-background-size: stretch stretch;
+    -fx-background-position: center center;
+    -fx-opacity: 0.8;
+}
+#bottom{
+	-fx-background-image: url(../image/ly.jpg);
+	-fx-background-size: stretch stretch;
+    -fx-background-position: center center;
+
+}
+#musiclist{
+	-fx-background-color:ghostwhite;
+	-fx-background-image: url(../image/ly.jpg);
+	-fx-background-size: stretch stretch;
+    -fx-background-position: center center;
+}
+
+#popupWindow{
+	-fx-background-image: url(../image/ly.jpg);
+	-fx-background-size: stretch stretch;
+	-fx-background-position: center center;
+}
+
