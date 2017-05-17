@@ -1,7 +1,5 @@
 package app.excuseme.model;
 
-import com.google.gson.JsonObject;
-
 /**
  * 
  * 封装的单首歌曲的信息</br>
@@ -16,12 +14,16 @@ import com.google.gson.JsonObject;
  * key			歌曲key</br>
  * public_time		出版年份</br>
  * title			歌曲名</br>
- * upload_date		上传时间
+ * upload_date		上传时间</br></br>
+ * 
+ * location		歌曲本地储存路径</br>
+ * length			歌曲时长</br>
  * </pre></b></p>
  * 
  */
-public class MusicInfo {
+public final class MusicInfo {
 
+	//在线歌曲包含属性
 	private String album;			//专辑
 	private String artist;			//艺术家
 	private String audio;			//音频URL
@@ -33,21 +35,11 @@ public class MusicInfo {
 	private String title;			//歌曲名
 	private String upload_date;		//上传时间
 	
+	//添加属性
+	private String location;		//歌曲本地储存路径
+	private String length;			//歌曲时长
 	
 	public MusicInfo(){}
-	
-	public MusicInfo(JsonObject jsonObject){
-		album = jsonObject.get("album").getAsString();
-		artist = jsonObject.get("artist").getAsString();
-		audio = jsonObject.get("audio").getAsString();
-		company = jsonObject.get("company").getAsString();
-		cover = jsonObject.get("cover").getAsString();
-		kbps = jsonObject.get("kbps").getAsString();
-		key = jsonObject.get("key").getAsString();
-		public_time = jsonObject.get("public_time").getAsString();
-		title = jsonObject.get("title").getAsString();
-		upload_date = jsonObject.get("upload_date").getAsString();
-	}
 	
 	public String getAlbum() {
 		return album;
@@ -108,6 +100,27 @@ public class MusicInfo {
 	}
 	public void setUploadDate(String upload_date) {
 		this.upload_date = upload_date;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getLength() {
+		return length;
+	}
+
+	public void setLength(String length) {
+		this.length = length;
+	}
+
+	//判断改歌曲是否在线歌曲
+	public boolean isOnline(){
+		return audio != null;
 	}
 	
 	
