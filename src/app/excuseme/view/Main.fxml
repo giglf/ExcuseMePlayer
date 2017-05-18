@@ -187,7 +187,7 @@
                </children>
             </HBox>
             <MenuButton id="btn-fm" fx:id="channelSelect" mnemonicParsing="false" prefHeight="35.0" prefWidth="56.0" text="FM" textFill="#141414" />
-            <ToggleButton id="btn-online" fx:id="chooseOnlineType" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="Online Music" textFill="#080808" />
+            <ToggleButton id="btn-online" fx:id="chooseOnlineType" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="Online Music" textFill="#080808" onAction="#networkSelectAction" />
          </children>
       </HBox>
    </top>

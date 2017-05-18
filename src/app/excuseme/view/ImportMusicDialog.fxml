@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="400.0" styleClass="ImportMusicDialog" stylesheets="@../util/css/ImportMusicDialog.css" xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.excuseme.view.ImportMusicDialogController">
+   <bottom>
+      <StackPane prefHeight="35.0" prefWidth="400.0">
+         <children>
+            <Button fx:id="importMusicButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#handleImport" prefHeight="45.0" prefWidth="400.0" text="导入曲库" />
+            <ProgressBar fx:id="progressBar" prefHeight="45.0" prefWidth="400.0" progress="0.0" visible="false" StackPane.alignment="CENTER" />
+         </children>
+      </StackPane>
+   </bottom>
+   <center>
+      <VBox prefHeight="69.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="label" alignment="CENTER" prefHeight="49.0" prefWidth="388.0" text="来来来，想听什么歌自己选~" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" top="15.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

@@ -22,10 +22,12 @@ public final class Constants {
 	
     
     //APP属性常量
+    public static final String APP_VERSION = "ExcuseMePlayer:develop";
     public static final String APP_TITLE = "Excuse Me???";
     
     
     //资源路径
     public static final String IMAGE = "/app/excuseme/util/image/";
     public static final String FXML = "/app/excuseme/view/";
+    public static String JAR;
 }

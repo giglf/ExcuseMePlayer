@@ -28,8 +28,12 @@ import com.sun.swing.internal.plaf.basic.resources.basic;
 import app.excuseme.util.Constants;
 import app.excuseme.util.ImportMusicTask;
 
+/**
+ *
+ * 用于导入本地歌曲，从网络获取随机歌曲
+ *
+ */
 public class MusicLibrary {
-	//PlayerTODO 整个类咯
 	
 	//在线歌曲包含属性
 	private static final String ALBUM = "album";			//专辑
@@ -106,10 +110,10 @@ public class MusicLibrary {
 		String type = filename.substring(filename.lastIndexOf('.')).toLowerCase();
 		
 		switch(type){
-			case "mp3":
-			case "mp4":
-			case "m4a":
-			case "wav":
+			case ".mp3":
+			case ".mp4":
+			case ".m4a":
+			case ".wav":
 				return true;
 			default:
 				return false;
@@ -232,7 +236,7 @@ public class MusicLibrary {
 					//歌曲长度
 					length.setTextContent(Integer.toString(header.getTrackLength()));
 					//码率
-					kbps.setTextContent(tag.getFirst(FieldKey.RATING));
+					kbps.setTextContent(header.getBitRate());
 					//储存路径
 					location.setTextContent(Paths.get(file.getAbsolutePath()).toString());
 					
@@ -263,7 +267,7 @@ public class MusicLibrary {
 		for(File file : files){
 			if(file.isFile() && isSupportedFileType(file)){
 				maxProgress++;
-			} else{
+			} else if(file.isDirectory()){
 				getMaxProgress(file);
 			}
 		}
