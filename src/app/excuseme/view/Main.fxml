@@ -13,7 +13,11 @@
 
 <BorderPane id="allstyle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../util/css/playerStyle.css" xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.excuseme.view.MainController">
    <right>
-      <VBox id="musiclist" prefHeight="370.0" prefWidth="263.0" BorderPane.alignment="CENTER" />
+      <ScrollPane BorderPane.alignment="CENTER">
+         <content>
+            <VBox id="musiclist" prefHeight="370.0" prefWidth="263.0" />
+         </content>
+      </ScrollPane>
    </right>
    <bottom>
       <BorderPane id="bottom" maxHeight="-Infinity" minHeight="-Infinity" opacity="0.96" prefHeight="50.0" styleClass="bottomBar">
@@ -35,7 +39,7 @@
                   </StackPane>
                </center>
                <right>
-                  <Label fx:id="timeRemaining" styleClass="bottomBarLabel" BorderPane.alignment="CENTER">
+                  <Label fx:id="timeRemaining" styleClass="bottomBarLabel" textFill="WHITE" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </BorderPane.margin>
@@ -187,11 +191,11 @@
                </children>
             </HBox>
             <MenuButton id="btn-fm" fx:id="channelSelect" mnemonicParsing="false" prefHeight="35.0" prefWidth="56.0" text="FM" textFill="#141414" />
-            <ToggleButton id="btn-online" fx:id="chooseOnlineType" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="Online Music" textFill="#080808" onAction="#networkSelectAction" />
+            <ToggleButton id="btn-online" fx:id="chooseOnlineType" mnemonicParsing="false" onAction="#networkSelectAction" prefHeight="40.0" prefWidth="115.0" text="Online Music" textFill="#080808" />
          </children>
       </HBox>
    </top>
    <center>
-      <Pane id="center" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <Pane id="center" prefHeight="200.0" prefWidth="519.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

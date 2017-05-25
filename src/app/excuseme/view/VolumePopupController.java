@@ -54,5 +54,10 @@ public class VolumePopupController implements Initializable{
 	}
 	
 	
+	Slider getSlider(){
+		return volumeSlider;
+	}
+	
+	
 	
 }

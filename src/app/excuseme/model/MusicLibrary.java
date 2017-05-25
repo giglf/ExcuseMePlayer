@@ -127,7 +127,7 @@ public class MusicLibrary {
 	
 			XMLInputFactory factory = XMLInputFactory.newInstance();
 			factory.setProperty("javax.xml.stream.isCoalescing", true);
-			FileInputStream inputStream = new FileInputStream(new File(Constants.JAR + "library.xml"));
+			FileInputStream inputStream = new FileInputStream(new File(Constants.JAR + "/library.xml"));
 			XMLStreamReader reader = factory.createXMLStreamReader(inputStream, "utf-8");
 			
 			String element = "";

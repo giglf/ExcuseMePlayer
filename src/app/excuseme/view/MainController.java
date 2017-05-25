@@ -44,6 +44,7 @@ public class MainController implements Initializable {
 	private Stage volumePopup;
 	
 	@FXML private Region frontSliderTrack;
+	@FXML private Region backSliderTrack;
 	@FXML private Slider timeSlider;
 //	@FXML private Label timePassed;
 	@FXML private Label timeRemaining;
@@ -68,6 +69,12 @@ public class MainController implements Initializable {
 		frontSliderTrack.prefWidthProperty().bind(timeSlider.widthProperty().multiply(timeSlider.valueProperty().divide(timeSlider.maxProperty())));
 		
 		createVolumePopup();
+		
+		loopButton.setOnMouseClicked(x -> {
+			ExcuseMePlayer.toggleLoop();
+		});
+		
+		
 
 		//默认打开时处于在线听歌状态
 		chooseOnlineType.setSelected(true); 
@@ -97,6 +104,11 @@ public class MainController implements Initializable {
 				}
 			}
 		);
+		
+		initializeTimeSlider();
+		initializeTimeLabels();
+		//PlayerTODO init
+		
 		
 	}
 	
@@ -135,7 +147,7 @@ public class MainController implements Initializable {
 		MusicInfo music = ExcuseMePlayer.getNowPlaying();
 		if(music != null){
 			timeSlider.setMin(0);
-//			timeSlider.setMax(value); PlayerTODO 获取音频时长
+			timeSlider.setMax(Integer.parseInt(music.getLength()) * 4);
 			timeSlider.setValue(0);
 			timeSlider.setBlockIncrement(1);
 		} else{
@@ -146,21 +158,54 @@ public class MainController implements Initializable {
 		}
 	}
 	
+	public void updateTimeSlider(){
+		timeSlider.increment();
+	}
+	
+	public void initializeTimeLabels(){
+		MusicInfo music = ExcuseMePlayer.getNowPlaying();
+		if(music != null){
+			timeRemaining.setText(ExcuseMePlayer.getTimeRemaining());
+		} else{
+			timeRemaining.setText("");
+		}
+	}
+	
+	public void updateTimeLabels(){
+		timeRemaining.setText(ExcuseMePlayer.getTimeRemaining());
+	}
+	
+	
+	/**
+	 * 更新播放暂停按钮
+	 * @param isPlaying
+	 */
+	public void updatePlayPauseIcon(boolean isPlaying){
+		controlBox.getChildren().remove(1);
+		if(isPlaying){
+			controlBox.getChildren().add(1, pauseButton);
+		}else {
+			controlBox.getChildren().add(1, playButton);
+		}
+	}
+	
 	@FXML
 	private void back(){
-		//PlayerTODO back() action
+		ExcuseMePlayer.back();
 	}
 	
 	@FXML
 	private void playPause(){
 		if(ExcuseMePlayer.isPlaying()){
-			//PlayerTODO playPause action			
+			ExcuseMePlayer.pause();
+		} else{
+			ExcuseMePlayer.play();
 		}
 	}
 	
 	@FXML
 	private void skip(){
-		//PlayerTODO skip action
+		ExcuseMePlayer.skip();
 	}
 	
 	@FXML
@@ -184,8 +229,11 @@ public class MainController implements Initializable {
 	}
 	
 	public boolean isTimeSliderPressed(){
-		// PlayerTODO timeSliderPressed check
-		return true;
+		return backSliderTrack.isPressed() || frontSliderTrack.isPressed();
+	}
+	
+	public Slider getVolumeSilder(){ 
+		return volumePopupController.getSlider();
 	}
 	
 	//-------------------------------本地歌库存储函数------------------------------
@@ -218,7 +266,9 @@ public class MainController implements Initializable {
 		}
 	}
 	
-	//新窗口创建library xml
+	/**
+	 * 新窗口创建library xml
+	 */
 	private static void createLibraryXML(){
 		try{
 			FXMLLoader loader = new FXMLLoader(ExcuseMePlayer.class.getResource(Constants.FXML + "ImportMusicDialog.fxml"));
@@ -246,7 +296,10 @@ public class MainController implements Initializable {
 		} 
 	}
 	
-	//从已有的xml文件中搜索本地music目录
+	/**
+	 * 从已有的xml文件中搜索本地music目录
+	 * @return 曲库目录的路径
+	 */
 	private static Path xmlMusicDirPathFinder(){
 		try {
 			XMLInputFactory factory = XMLInputFactory.newInstance();
@@ -278,7 +331,10 @@ public class MainController implements Initializable {
 		}
 	}
 	
-	//从xml文件中检索当前拥有歌曲数量
+	/**
+	 * 从xml文件中检索当前拥有歌曲数量
+	 * @return 歌曲 
+	 */
 	private static int xmlMusicDirFileNumFinder(){
 		try {
 			XMLInputFactory factory = XMLInputFactory.newInstance();
@@ -310,7 +366,12 @@ public class MainController implements Initializable {
 		}
 	}
 	
-	//计算目录中歌曲的数量
+	/**
+	 * 计算目录中歌曲的数量
+	 * @param musisDirecity 歌曲的路径
+	 * @param i				当前初始搜索的歌曲数量
+	 * @return				当前目录下包括子目录的歌曲数量
+	 */
 	private static int musicDirFileNumCounter(File musisDirecity, int i){
 		File[] files = musisDirecity.listFiles();
 		int num = i;
