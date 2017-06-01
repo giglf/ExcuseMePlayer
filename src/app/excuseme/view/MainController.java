@@ -19,6 +19,7 @@ import app.excuseme.util.Constants;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
+import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -46,7 +47,6 @@ public class MainController implements Initializable {
 	@FXML private Region frontSliderTrack;
 	@FXML private Region backSliderTrack;
 	@FXML private Slider timeSlider;
-//	@FXML private Label timePassed;
 	@FXML private Label timeRemaining;
 	
 	@FXML private HBox controlBox;
@@ -72,9 +72,13 @@ public class MainController implements Initializable {
 		
 		loopButton.setOnMouseClicked(x -> {
 			ExcuseMePlayer.toggleLoop();
+			//PlayerTODO loopButton style change
 		});
 		
-		
+		shuffleButton.setOnMouseClicked(x -> {
+			ExcuseMePlayer.toggleShuffer();
+			//PlayerTODO shufferButton style change
+		});
 
 		//默认打开时处于在线听歌状态
 		chooseOnlineType.setSelected(true); 

@@ -3,6 +3,7 @@ package app.excuseme;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -181,6 +182,22 @@ public class ExcuseMePlayer extends Application{
 		}
 	}
 	
+	/**
+	 * 触发随机播放
+	 */
+	public static void toggleShuffer(){
+		isShuffleActive = !isShuffleActive;
+		if(isShuffleActive){
+			Collections.shuffle(nowPlayingList);
+		} else{
+			nowPlayingList = MusicLibrary.getLocalMusics();
+		}
+		
+	}
+	
+	/**
+	 * 触发循环播放
+	 */
 	public static void toggleLoop(){
 		isLoopActive = !isLoopActive;
 	}
