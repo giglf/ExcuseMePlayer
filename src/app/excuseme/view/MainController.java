@@ -8,7 +8,6 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
-
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
@@ -19,13 +18,14 @@ import app.excuseme.util.Constants;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
-import javafx.css.PseudoClass;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -33,7 +33,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -60,6 +59,8 @@ public class MainController implements Initializable {
 	@FXML private TextField searchBox;
 	@FXML private MenuButton channelSelect;
 	@FXML private ToggleButton chooseOnlineType;
+	
+	@FXML private ScrollPane playListView;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -113,7 +114,20 @@ public class MainController implements Initializable {
 		initializeTimeLabels();
 		//PlayerTODO init
 		
+		loadView();
+	}
+	
+	
+	public void loadView(){
 		
+		try {
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource(Constants.FXML + "Songs.fxml"));
+			Node view = loader.load();
+			playListView.setContent(view);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void createVolumePopup() {
@@ -243,16 +257,7 @@ public class MainController implements Initializable {
 	//-------------------------------本地歌库存储函数------------------------------
 	
 	public void checkLocalLibraryXML(){
-		//获取当前jar文件所在路径
-		File jarFile = null;
-		try {
-			jarFile = new File(ExcuseMePlayer.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-		String jarFilePath = jarFile.getParentFile().getPath();
 		
-		Constants.JAR = jarFilePath + "/";
 		//用于储存本地歌曲的信息
 		File libraryXML = new File(Constants.JAR + "library.xml");
 		

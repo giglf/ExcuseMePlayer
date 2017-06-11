@@ -102,7 +102,7 @@ public class MusicLibrary {
 			localMusics = new ArrayList<>();
 			updatePlayList();
 		}
-		return localMusics;
+		return new ArrayList<>(localMusics);
 	}
 	
 	public static boolean isSupportedFileType(File file){

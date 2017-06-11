@@ -1,5 +1,7 @@
 package app.excuseme;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -45,6 +47,16 @@ public class ExcuseMePlayer extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		
+		//获取当前jar文件所在路径
+		File jarFile = null;
+		try {
+			jarFile = new File(ExcuseMePlayer.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		String jarFilePath = jarFile.getParentFile().getPath();	
+		Constants.JAR = jarFilePath + "/";
+		
 		timer = new Timer();
 		timerCounter = 0;
 		
@@ -61,7 +73,7 @@ public class ExcuseMePlayer extends Application{
 		
 		Scene scene = new Scene(loader.load());
 		stage.setScene(scene);
-		stage.setResizable(false);
+//		stage.setResizable(false);
 //		stage.setMaximized(true);
 		stage.show();
 		
@@ -192,6 +204,7 @@ public class ExcuseMePlayer extends Application{
 		} else{
 			nowPlayingList = MusicLibrary.getLocalMusics();
 		}
+		mainController.loadView();
 		
 	}
 	
@@ -241,6 +254,12 @@ public class ExcuseMePlayer extends Application{
 	public static Stage getStage(){
 		return stage;
 	}
+	
+	public static ArrayList<MusicInfo> getPlayingList(){
+		return nowPlayingList;
+	}
+	
+	
 	
 //	------------------------------------------------------------------
 	

@@ -13,11 +13,15 @@
 
 <BorderPane id="allstyle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../util/css/playerStyle.css" xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.excuseme.view.MainController">
    <right>
-      <ScrollPane BorderPane.alignment="CENTER">
-         <content>
-            <VBox id="musiclist" prefHeight="370.0" prefWidth="263.0" />
-         </content>
-      </ScrollPane>
+      <BorderPane BorderPane.alignment="CENTER">
+         <center>
+            <ScrollPane fx:id="playListView">
+               <content>
+                  <VBox id="musiclist" prefHeight="370.0" prefWidth="263.0" />
+               </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
    </right>
    <bottom>
       <BorderPane id="bottom" maxHeight="-Infinity" minHeight="-Infinity" opacity="0.96" prefHeight="50.0" styleClass="bottomBar">

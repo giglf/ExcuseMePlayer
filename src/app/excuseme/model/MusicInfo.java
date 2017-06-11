@@ -123,6 +123,12 @@ public final class MusicInfo {
 		return audio != null;
 	}
 	
+	public String getMinuteSecondLength(){
+		int totalSeconds = Integer.parseInt(length);
+		long minutes = totalSeconds / 60;
+		long seconds = totalSeconds % 60;
+		return Long.toString(minutes) + ":" + (seconds<10? "0" + seconds : Long.toString(seconds));
+	}
 	
 	
 }
