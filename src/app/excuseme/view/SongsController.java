@@ -41,7 +41,7 @@ public class SongsController implements Initializable {
     	tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     	
     	
-    	titleColumn.prefWidthProperty().bind(tableView.widthProperty());
+    	titleColumn.prefWidthProperty().bind(tableView.widthProperty().subtract(50).multiply(0.30));
         artistColumn.prefWidthProperty().bind(tableView.widthProperty().subtract(50).multiply(0.30));
         albumColumn.prefWidthProperty().bind(tableView.widthProperty().subtract(50).multiply(0.30));
         lengthColumn.prefWidthProperty().bind(tableView.widthProperty().subtract(50).multiply(0.30));
