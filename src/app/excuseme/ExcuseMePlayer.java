@@ -75,6 +75,7 @@ public class ExcuseMePlayer extends Application{
 				mediaPlayer.dispose();
 				System.gc();
 			}
+			CacheManager.deleteAll();
 			Platform.exit();
 			System.exit(0);
 		});

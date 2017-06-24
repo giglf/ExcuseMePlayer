@@ -26,7 +26,7 @@ public class OnlineDataGetter {
 			try {
 				downloader[i] = new HttpDownload("http://doufm.info" + musicList[i].getAudio());
 				downloader[i].setSaveLocation(CacheManager.getSongsDir().toFile());
-				downloader[i].setSavingFile("/" + musicList[i].getTitle() + ".mp3");
+				downloader[i].setSavingFile("/" + musicList[i].hashCode() + ".mp3");
 //				Thread.sleep(500);
 				downloader[i].download();
 			} catch (Exception e) {
