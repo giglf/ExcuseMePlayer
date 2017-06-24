@@ -11,6 +11,8 @@ import java.util.TimerTask;
 
 import app.excuseme.model.MusicInfo;
 import app.excuseme.model.MusicLibrary;
+import app.excuseme.model.PlayListInfo;
+import app.excuseme.util.CacheManager;
 import app.excuseme.util.Constants;
 import app.excuseme.view.MainController;
 import javafx.application.Application;
@@ -31,6 +33,7 @@ public class ExcuseMePlayer extends Application{
 	private static MediaPlayer mediaPlayer;
 	private static Timer timer;
 	private static int timerCounter;
+	private static PlayListInfo currentOnlinePlayList;
 	private static ArrayList<MusicInfo> nowPlayingList;
 	private static int nowPlayingIndex;
 	private static MusicInfo nowPlaying;
@@ -65,7 +68,11 @@ public class ExcuseMePlayer extends Application{
 		ExcuseMePlayer.stage.setTitle(Constants.APP_TITLE);
 		ExcuseMePlayer.stage.getIcons().add(new Image(this.getClass().getResource(Constants.IMAGE + "AppIcon.png").toString()));
 		ExcuseMePlayer.stage.setOnCloseRequest(event ->{
+			mediaPlayer.stop();
+			mediaPlayer.dispose();
 			Platform.exit();
+			System.gc();
+			CacheManager.deleteAll();
 			System.exit(0);
 		});
 		
@@ -73,20 +80,42 @@ public class ExcuseMePlayer extends Application{
 		
 		Scene scene = new Scene(loader.load());
 		stage.setScene(scene);
-//		stage.setResizable(false);
+		stage.setResizable(false);
 //		stage.setMaximized(true);
 		stage.show();
 		
 		mainController = loader.getController();
-		mainController.checkLocalLibraryXML();
-		PlayerTest();
+		
+		channelUpdateAndPlay();
+//		nowPlayingList = MusicLibrary.getOnlineMusics(currentOnlinePlayList);
+//		mainController.loadView();
+//		PlayerTest();
 	}
 	
 	//PlayerTODO testing 
 	public static void PlayerTest(){
-		nowPlayingList = MusicLibrary.getLocalMusics();
+//		nowPlayingList = MusicLibrary.getOnlineMusics(currentOnlinePlayList);
 		setNowPlaying(0);
 		play();
+	}
+	
+	public static void playingLocalMusic(){
+		mainController.checkLocalLibraryXML();
+		nowPlayingList = MusicLibrary.getLocalMusics();
+		mainController.loadView();
+		setNowPlaying(0);
+		play();
+	}
+	
+	public static void channelUpdateAndPlay(){
+		nowPlayingList = MusicLibrary.getOnlineMusics(currentOnlinePlayList);
+		mainController.loadView();
+		setNowPlaying(0);
+		play();
+	}
+	
+	public static void setCurrentOnlinePlayList(PlayListInfo playList){
+		currentOnlinePlayList = playList;
 	}
 	
 	
@@ -107,6 +136,11 @@ public class ExcuseMePlayer extends Application{
 		timerCounter = 0;
 		String path = nowPlaying.getLocation();
 		Media media = new Media(Paths.get(path).toUri().toString());
+		
+		if(mediaPlayer != null){
+			mediaPlayer.stop();
+			mediaPlayer.dispose();
+		}
 		mediaPlayer = new MediaPlayer(media);
 		mediaPlayer.volumeProperty().bind(mainController.getVolumeSilder().valueProperty().divide(200));
 		mediaPlayer.setOnEndOfMedia(new SongSkipper());

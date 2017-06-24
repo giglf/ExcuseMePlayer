@@ -11,44 +11,45 @@ import app.excuseme.util.*;
 
 public class RequestMusic {
 	static Gson gson=new Gson();
-	public Reader doGet(String url)throws Exception
+	public static Reader doGet(String url)throws Exception
 	{
 		URL localURL=new URL(url);
 		URLConnection connection=(HttpURLConnection) localURL.openConnection();
+		connection.setRequestProperty("User-Agent", Constants.APP_VERSION);
 		InputStreamReader iReader=new InputStreamReader(connection.getInputStream());	
 		return iReader;
 	}
-	public PlayListInfo[]  getTotalPlayList()throws Exception
+	public static PlayListInfo[]  getTotalPlayList()throws Exception
 	{
 		PlayListInfo[] playListInfos=gson.fromJson(doGet(Constants.PLAYLIST_URL), PlayListInfo[].class);
 		return playListInfos;
 	}
-	public MusicInfo[] getRandomMusicList(PlayListInfo list,int num)throws Exception
+	public static MusicInfo[] getRandomMusicList(PlayListInfo list,int num)throws Exception
 	{	
 		MusicInfo[] musicInfo = gson.fromJson(doGet(Constants.PLAYLIST_URL+list.getKey()+"/?num="+num), MusicInfo[].class);	
 		return musicInfo;
 	}
 	
-	public MusicInfo[] searchMusic(String title)throws Exception
+	public static MusicInfo[] searchMusic(String title)throws Exception
 	{
 		MusicInfo[] musicInfo;
 		musicInfo=gson.fromJson(doGet(Constants.MUSIC_URL+"?title="+title), MusicInfo[].class);
 		return musicInfo;
 	}
-	public MusicInfo[] searchMusic(String title,int kbps)throws Exception
+	public static MusicInfo[] searchMusic(String title,int kbps)throws Exception
 	{
 		MusicInfo[] musicInfo;
 		musicInfo=gson.fromJson(doGet(Constants.MUSIC_URL+"?title="+title+"&kbps="+kbps), MusicInfo[].class);
 		return musicInfo;
 	}
 	
-	public MusicInfo[] searchMusic(int start,int end)throws Exception
+	public static MusicInfo[] searchMusic(int start,int end)throws Exception
 	{
 		MusicInfo[] musicInfo;
 		musicInfo=gson.fromJson(doGet(Constants.MUSIC_URL+"?start="+start+"&end="+end), MusicInfo[].class);
 		return musicInfo;
 	}
-	public MusicInfo[] searchMusic(int start)throws Exception
+	public static MusicInfo[] searchMusic(int start)throws Exception
 	{
 		MusicInfo[] musicInfo;
 		musicInfo=gson.fromJson(doGet(Constants.MUSIC_URL+"?start="+start), MusicInfo[].class);

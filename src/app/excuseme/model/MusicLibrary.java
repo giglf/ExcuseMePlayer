@@ -25,6 +25,8 @@ import org.w3c.dom.Element;
 
 import com.sun.swing.internal.plaf.basic.resources.basic;
 
+import app.excuseme.network.OnlineDataGetter;
+import app.excuseme.network.RequestMusic;
 import app.excuseme.util.Constants;
 import app.excuseme.util.ImportMusicTask;
 
@@ -47,8 +49,23 @@ public class MusicLibrary {
 	private static final String LENGTH = "length";			//歌曲时长
 	
 	private static int maxProgress;
+	private static ArrayList<PlayListInfo> totalPlayList;
 	private static ArrayList<MusicInfo> localMusics;
+	private static ArrayList<MusicInfo> onlineMusics;
 	private static ImportMusicTask<Boolean> importMusicTask;
+	
+	
+	//获取在线歌曲
+	public static ArrayList<MusicInfo> getOnlineMusics(PlayListInfo playList){
+		try {
+			MusicInfo[] musics = RequestMusic.getRandomMusicList(playList, 4);
+			onlineMusics = OnlineDataGetter.musicGetter(musics);
+			System.out.println("All download finish.");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return onlineMusics;
+	}
 	
 	//音乐导入
 	public static void importMusic(String path, ImportMusicTask<Boolean> task) throws Exception{
@@ -119,6 +136,7 @@ public class MusicLibrary {
 				return false;
 		}
 	}
+
 	
 	//从xml中读取歌曲信息
 	private static void updatePlayList(){

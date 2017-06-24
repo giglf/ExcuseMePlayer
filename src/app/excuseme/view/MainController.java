@@ -14,10 +14,14 @@ import javax.xml.stream.XMLStreamReader;
 import app.excuseme.ExcuseMePlayer;
 import app.excuseme.model.MusicInfo;
 import app.excuseme.model.MusicLibrary;
+import app.excuseme.model.PlayListInfo;
+import app.excuseme.network.RequestMusic;
 import app.excuseme.util.Constants;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,6 +29,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -70,6 +75,7 @@ public class MainController implements Initializable {
 		frontSliderTrack.prefWidthProperty().bind(timeSlider.widthProperty().multiply(timeSlider.valueProperty().divide(timeSlider.maxProperty())));
 		
 		createVolumePopup();
+		channelSelectedSetting();
 		
 		loopButton.setOnMouseClicked(x -> {
 			ExcuseMePlayer.toggleLoop();
@@ -83,6 +89,13 @@ public class MainController implements Initializable {
 
 		//默认打开时处于在线听歌状态
 		chooseOnlineType.setSelected(true); 
+		chooseOnlineType.setOnAction((event)->{
+			if(chooseOnlineType.isSelected()){
+				ExcuseMePlayer.channelUpdateAndPlay();
+			} else{
+				ExcuseMePlayer.playingLocalMusic();
+			}
+		});
 		
 		timeSlider.setFocusTraversable(false);
 		
@@ -114,7 +127,7 @@ public class MainController implements Initializable {
 		initializeTimeLabels();
 		//PlayerTODO init
 		
-		loadView();
+//		loadView(); 应该在导入完歌曲后再加载
 	}
 	
 	
@@ -126,6 +139,30 @@ public class MainController implements Initializable {
 			playListView.setContent(view);
 			
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void channelSelectedSetting(){
+		try {
+			PlayListInfo[] playListInfos = RequestMusic.getTotalPlayList();
+			for(PlayListInfo playListInfo : playListInfos){
+				MenuItem item = new MenuItem(playListInfo.getName());
+				item.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+						channelSelect.setText(item.getText());
+						ExcuseMePlayer.setCurrentOnlinePlayList(playListInfo);
+						ExcuseMePlayer.channelUpdateAndPlay();
+					}
+				});
+				channelSelect.getItems().add(item);
+				//PlayerTODO
+			}
+			
+			channelSelect.setText(playListInfos[0].getName());
+			ExcuseMePlayer.setCurrentOnlinePlayList(playListInfos[0]);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -20,7 +20,7 @@ public class CacheManager {
 	 * 获取储存缓存数据的临时文件夹
 	 * @return 临时文件夹
 	 */
-	public static Path getInstance(){
+	public static Path getTmpFileDir(){
 		try{
 			if(tmpFileDir==null){
 				tmpFileDir = Files.createTempDirectory("ExcuseMePlayer");
@@ -55,14 +55,14 @@ public class CacheManager {
 	}
 	
 	private static void createSongsDir(){
-		tmpFileDir = getInstance();
+		tmpFileDir = getTmpFileDir();
 		File songsFile = new File(tmpFileDir.toString() + "/songs");
 		songsFile.mkdirs();
 		songsDir = songsFile.toPath();
 	}
 	
 	private static void createLyricsDir(){
-		tmpFileDir = getInstance();
+		tmpFileDir = getTmpFileDir();
 		File lyricsFile = new File(tmpFileDir.toString() + "/lyrics");
 		lyricsFile.mkdirs();
 		lyricsDir = lyricsFile.toPath();
@@ -81,10 +81,8 @@ public class CacheManager {
 			for(File f : file.listFiles()){
 				deleteFile(f);
 			}
-			file.delete();
-		} else if (file.exists()){
-			file.delete();
 		}
+		file.delete();
 	}
 	
 }
