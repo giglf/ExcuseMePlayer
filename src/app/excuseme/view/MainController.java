@@ -26,6 +26,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -61,6 +62,7 @@ public class MainController implements Initializable {
 	@FXML private Pane shuffleButton;
 	
 	@FXML private TextField searchBox;
+	@FXML private Button searchButton;
 	@FXML private MenuButton channelSelect;
 	@FXML private ToggleButton chooseOnlineType;
 	
@@ -95,6 +97,17 @@ public class MainController implements Initializable {
 				if(!updateSuccess) chooseOnlineType.setSelected(false);
 			} else{
 				ExcuseMePlayer.playingLocalMusic();
+			}
+		});
+		
+		searchButton.setOnAction((event)->{
+			if(searchBox.getText()!="" || searchBox.getText()!=null){
+				String songName = searchBox.getText();
+				if(ExcuseMePlayer.isNetworkType()){
+					ExcuseMePlayer.getOnlineSearchMusicAndPlay(songName);
+				} else{
+					ExcuseMePlayer.getLocalSearchMusicAndPlay(songName);
+				}
 			}
 		});
 		

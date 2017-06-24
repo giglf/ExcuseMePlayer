@@ -180,7 +180,7 @@
    <top>
       <HBox id="TopItem" prefHeight="29.0" prefWidth="834.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="31.0" prefWidth="279.0">
                <children>
                   <ImageView fitHeight="31.0" fitWidth="39.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -188,9 +188,10 @@
                      </image>
                   </ImageView>
                   <TextField fx:id="searchBox" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="180.0" promptText="Search" styleClass="searchBox" />
+                  <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" text="Search" />
                </children>
             </HBox>
-            <MenuButton id="btn-fm" fx:id="channelSelect" mnemonicParsing="false" prefHeight="35.0" prefWidth="56.0" text="FM" textFill="#141414" />
+            <MenuButton id="btn-fm" fx:id="channelSelect" mnemonicParsing="false" prefHeight="31.0" prefWidth="70.0" text="FM" textFill="#141414" />
             <ToggleButton id="btn-online" fx:id="chooseOnlineType" mnemonicParsing="false" onAction="#networkSelectAction" prefHeight="40.0" prefWidth="115.0" text="Online Music" textFill="#080808" />
          </children>
       </HBox>

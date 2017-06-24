@@ -11,6 +11,8 @@ import java.util.TimerTask;
 import app.excuseme.model.MusicInfo;
 import app.excuseme.model.MusicLibrary;
 import app.excuseme.model.PlayListInfo;
+import app.excuseme.network.OnlineDataGetter;
+import app.excuseme.network.RequestMusic;
 import app.excuseme.util.CacheManager;
 import app.excuseme.util.Constants;
 import app.excuseme.view.MainController;
@@ -68,11 +70,12 @@ public class ExcuseMePlayer extends Application{
 		ExcuseMePlayer.stage.setTitle(Constants.APP_TITLE);
 		ExcuseMePlayer.stage.getIcons().add(new Image(this.getClass().getResource(Constants.IMAGE + "AppIcon.png").toString()));
 		ExcuseMePlayer.stage.setOnCloseRequest(event ->{
-			mediaPlayer.stop();
-			mediaPlayer.dispose();
+			if(mediaPlayer!=null){
+				mediaPlayer.stop();
+				mediaPlayer.dispose();
+				System.gc();
+			}
 			Platform.exit();
-			System.gc();
-			CacheManager.deleteAll();
 			System.exit(0);
 		});
 		
@@ -97,6 +100,40 @@ public class ExcuseMePlayer extends Application{
 //		nowPlayingList = MusicLibrary.getOnlineMusics(currentOnlinePlayList);
 		setNowPlaying(0);
 		play();
+	}
+	
+	
+	//从当前播放列表搜索歌曲并播放
+	public static void getLocalSearchMusicAndPlay(String songName){
+		for(MusicInfo song : nowPlayingList){
+			if(song.getTitle().equals(songName)){
+				setNowPlaying(nowPlayingList.indexOf(song));
+				play();
+				return;
+			}
+		}
+	}
+	
+	
+	//获取在线搜索到的歌曲并且加载到列表播放
+	public static void getOnlineSearchMusicAndPlay(String songName){
+		try {
+			MusicInfo[] music = RequestMusic.searchMusic(songName);
+			if(music.length == 0){
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Excuse Me???");
+				alert.setHeaderText("ERROR");
+				alert.setContentText("搜不到这首歌");
+				alert.showAndWait();
+			}else{
+				nowPlayingList = OnlineDataGetter.musicGetter(music);
+				mainController.loadView();
+				setNowPlaying(0);
+				play();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void playingLocalMusic(){
