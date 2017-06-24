@@ -2,7 +2,6 @@ package app.excuseme;
 
 import java.io.File;
 import java.net.URISyntaxException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -86,7 +85,7 @@ public class ExcuseMePlayer extends Application{
 		
 		mainController = loader.getController();
 		
-		channelUpdateAndPlay();
+//		channelUpdateAndPlay();
 //		nowPlayingList = MusicLibrary.getOnlineMusics(currentOnlinePlayList);
 //		mainController.loadView();
 //		PlayerTest();
@@ -235,8 +234,6 @@ public class ExcuseMePlayer extends Application{
 		isShuffleActive = !isShuffleActive;
 		if(isShuffleActive){
 			Collections.shuffle(nowPlayingList);
-		} else{
-			nowPlayingList = MusicLibrary.getLocalMusics();
 		}
 		mainController.loadView();
 		
@@ -251,6 +248,14 @@ public class ExcuseMePlayer extends Application{
 	
 	public static boolean isLoopActive(){
 		return isLoopActive;
+	}
+	
+	public static void setIsNetworkType(boolean isNetwork){
+		isNetworkType = isNetwork;
+	}
+	
+	public static boolean isNetworkType(){
+		return isNetworkType;
 	}
 	
 	/**

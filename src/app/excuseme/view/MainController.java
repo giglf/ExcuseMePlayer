@@ -3,7 +3,6 @@ package app.excuseme.view;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -90,6 +89,7 @@ public class MainController implements Initializable {
 		//默认打开时处于在线听歌状态
 		chooseOnlineType.setSelected(true); 
 		chooseOnlineType.setOnAction((event)->{
+			ExcuseMePlayer.setIsNetworkType(chooseOnlineType.isSelected());
 			if(chooseOnlineType.isSelected()){
 				ExcuseMePlayer.channelUpdateAndPlay();
 			} else{
@@ -153,15 +153,14 @@ public class MainController implements Initializable {
 					public void handle(ActionEvent event) {
 						channelSelect.setText(item.getText());
 						ExcuseMePlayer.setCurrentOnlinePlayList(playListInfo);
-						ExcuseMePlayer.channelUpdateAndPlay();
+						if(ExcuseMePlayer.isNetworkType()){
+							ExcuseMePlayer.channelUpdateAndPlay();
+						}
 					}
 				});
 				channelSelect.getItems().add(item);
 				//PlayerTODO
 			}
-			
-			channelSelect.setText(playListInfos[0].getName());
-			ExcuseMePlayer.setCurrentOnlinePlayList(playListInfos[0]);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
