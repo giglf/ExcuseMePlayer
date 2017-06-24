@@ -11,11 +11,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane id="allstyle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../util/css/playerStyle.css" xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.excuseme.view.MainController">
+<BorderPane id="allstyle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="862.0" stylesheets="@../util/css/playerStyle.css" xmlns="http://javafx.com/javafx/8.0.45" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.excuseme.view.MainController">
    <right>
       <ScrollPane fx:id="playListView" BorderPane.alignment="CENTER"> 
          <content> 
-            <VBox id="musiclist" prefHeight="370.0" prefWidth="263.0" /> 
+            <VBox id="musiclist" prefHeight="382.0" prefWidth="263.0" /> 
          </content> 
       </ScrollPane> 
    </right>
