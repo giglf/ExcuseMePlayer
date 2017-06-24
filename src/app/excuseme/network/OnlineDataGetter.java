@@ -33,7 +33,11 @@ public class OnlineDataGetter {
 				e.printStackTrace();
 			}
 		}
-		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
 		try {
 			for (int i = 0; i < downloader.length; i++) {
 				if(!downloader[i].isNetworkFine()) {return null;}
