@@ -24,9 +24,10 @@ public class OnlineDataGetter {
 		HttpDownload[] downloader = new HttpDownload[musicList.length];
 		for(int i=0;i<musicList.length;i++){
 			try {
-				downloader[i] = new HttpDownload("http://doufm.info" + musicList[i].getAudio(), 1);
+				downloader[i] = new HttpDownload("http://doufm.info" + musicList[i].getAudio());
 				downloader[i].setSaveLocation(CacheManager.getSongsDir().toFile());
 				downloader[i].setSavingFile("/" + musicList[i].getTitle() + ".mp3");
+//				Thread.sleep(500);
 				downloader[i].download();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -35,6 +36,7 @@ public class OnlineDataGetter {
 		
 		try {
 			for (int i = 0; i < downloader.length; i++) {
+				if(!downloader[i].isNetworkFine()) {return null;}
 				while (!downloader[i].isDownloadFinished()) {Thread.sleep(1000);}
 				AudioFile audioFile = AudioFileIO.read(downloader[i].getSaveFile());
 				AudioHeader header = audioFile.getAudioHeader();

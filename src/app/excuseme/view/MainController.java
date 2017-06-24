@@ -86,12 +86,13 @@ public class MainController implements Initializable {
 			//PlayerTODO shufferButton style change
 		});
 
-		//默认打开时处于在线听歌状态
+		//默认打开时处于在线听歌状态,需要用户选择才会下载相应频道的歌
 		chooseOnlineType.setSelected(true); 
 		chooseOnlineType.setOnAction((event)->{
 			ExcuseMePlayer.setIsNetworkType(chooseOnlineType.isSelected());
 			if(chooseOnlineType.isSelected()){
-				ExcuseMePlayer.channelUpdateAndPlay();
+				boolean updateSuccess = ExcuseMePlayer.channelUpdateAndPlay();
+				if(!updateSuccess) chooseOnlineType.setSelected(false);
 			} else{
 				ExcuseMePlayer.playingLocalMusic();
 			}
@@ -159,7 +160,6 @@ public class MainController implements Initializable {
 					}
 				});
 				channelSelect.getItems().add(item);
-				//PlayerTODO
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

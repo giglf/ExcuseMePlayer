@@ -23,8 +23,6 @@ import org.jaudiotagger.tag.Tag;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.sun.swing.internal.plaf.basic.resources.basic;
-
 import app.excuseme.network.OnlineDataGetter;
 import app.excuseme.network.RequestMusic;
 import app.excuseme.util.Constants;
@@ -49,7 +47,6 @@ public class MusicLibrary {
 	private static final String LENGTH = "length";			//歌曲时长
 	
 	private static int maxProgress;
-	private static ArrayList<PlayListInfo> totalPlayList;
 	private static ArrayList<MusicInfo> localMusics;
 	private static ArrayList<MusicInfo> onlineMusics;
 	private static ImportMusicTask<Boolean> importMusicTask;
@@ -58,7 +55,7 @@ public class MusicLibrary {
 	//获取在线歌曲
 	public static ArrayList<MusicInfo> getOnlineMusics(PlayListInfo playList){
 		try {
-			MusicInfo[] musics = RequestMusic.getRandomMusicList(playList, 4);
+			MusicInfo[] musics = RequestMusic.getRandomMusicList(playList, 7);
 			onlineMusics = OnlineDataGetter.musicGetter(musics);
 			System.out.println("All download finish.");
 		} catch (Exception e) {

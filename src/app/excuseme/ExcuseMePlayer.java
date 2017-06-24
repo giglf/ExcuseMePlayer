@@ -18,6 +18,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -106,11 +107,21 @@ public class ExcuseMePlayer extends Application{
 		play();
 	}
 	
-	public static void channelUpdateAndPlay(){
+	public static boolean channelUpdateAndPlay(){
 		nowPlayingList = MusicLibrary.getOnlineMusics(currentOnlinePlayList);
-		mainController.loadView();
-		setNowPlaying(0);
-		play();
+		if(nowPlayingList != null){
+			mainController.loadView();
+			setNowPlaying(0);
+			play();
+			return true;
+		} else{
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setTitle("Excuse Me???");
+			alert.setHeaderText("网络错误");
+			alert.setContentText("不能获取在线歌曲……听本地的歌啦！");
+			alert.showAndWait();
+			return false;
+		}
 	}
 	
 	public static void setCurrentOnlinePlayList(PlayListInfo playList){
