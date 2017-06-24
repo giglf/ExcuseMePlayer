@@ -23,7 +23,10 @@ public class CacheManager {
 	public static Path getTmpFileDir(){
 		try{
 			if(tmpFileDir==null){
-				tmpFileDir = Files.createTempDirectory("ExcuseMePlayer");
+				String tDir = System.getProperty("java.io.tmpdir");
+				File tmpDir = new File(tDir + "ExcuseMePlayer");
+				tmpDir.mkdirs();
+				tmpFileDir = tmpDir.toPath();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
