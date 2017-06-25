@@ -13,13 +13,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 
 public class SongsController implements Initializable {
@@ -30,8 +28,6 @@ public class SongsController implements Initializable {
     @FXML private TableColumn<MusicInfo, String> artistColumn;
     @FXML private TableColumn<MusicInfo, String> albumColumn;
     @FXML private TableColumn<MusicInfo, String> lengthColumn;
-    
-    private ScrollBar scrollBar;
     
     private MusicInfo selectedMusic;
     
