@@ -1,5 +1,10 @@
 package app.excuseme.network;
 
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -8,10 +13,19 @@ import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.AudioHeader;
 import app.excuseme.model.MusicInfo;
 import app.excuseme.util.CacheManager;
+import app.excuseme.util.Constants;
 import app.excuseme.util.HttpDownload;
 
 public class OnlineDataGetter {
 
+	
+	public static Reader doGet(String url)throws Exception{
+		URL localURL=new URL(url);
+		URLConnection connection=(HttpURLConnection) localURL.openConnection();
+		connection.setRequestProperty("User-Agent", Constants.APP_VERSION);
+		InputStreamReader iReader=new InputStreamReader(connection.getInputStream());	
+		return iReader;
+	}
 	
 	/**
 	 * 获取在线音乐播放列表

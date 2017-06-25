@@ -104,3 +104,5 @@ But you will get 404 not found if you access it.
 Then I found the reason is the domain of `s.gecimi.com` ought to be `s.geci.me`
 
 When using this api should look out that.
+
+***Notice: ** I found that url bug have fixed. Which means we can use the original url `s.gecimi.com` (2017.6.25) 
