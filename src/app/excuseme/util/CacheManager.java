@@ -76,7 +76,9 @@ public class CacheManager {
 	 * 缓存文件夹所有内容
 	 */
 	public static void deleteAll(){
-		deleteFile(tmpFileDir.toFile());
+		if(tmpFileDir != null){
+			deleteFile(tmpFileDir.toFile());
+		}
 	}
 	
 	private static void deleteFile(File file){
