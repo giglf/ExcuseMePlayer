@@ -8,6 +8,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import app.excuseme.model.LyricInfo;
+import app.excuseme.util.Constants;
 
 /**
  *
@@ -17,12 +18,12 @@ import app.excuseme.model.LyricInfo;
 public class RequestLyrics {
 
 	public static LyricInfo[] getAllLyricInfo(String title) throws Exception{
-		Reader reader = OnlineDataGetter.doGet("http://gecimi.com/api/lyric/" + title);
+		Reader reader = OnlineDataGetter.doGet(Constants.LYRIC_URL + title);
 		return parsingJson(reader);
 	}
 	
 	public static LyricInfo[] getAllLyricInfo(String title, String artist) throws Exception{
-		Reader reader = OnlineDataGetter.doGet("http://gecimi.com/api/lyric/" + title + "/" + artist);
+		Reader reader = OnlineDataGetter.doGet(Constants.LYRIC_URL + title + "/" + artist);
 		return parsingJson(reader);
 	}
 

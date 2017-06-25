@@ -174,6 +174,10 @@ public class ExcuseMePlayer extends Application{
 	public static void setNowPlaying(int index){
 		nowPlayingIndex = index;
 		nowPlaying = nowPlayingList.get(index);
+		if(nowPlaying.getLyricPath() == null){  //获取歌词
+			nowPlaying = OnlineDataGetter.lyricGetter(nowPlaying);
+		}
+		
 		if(mediaPlayer != null){
 			mediaPlayer.stop();
 		}
@@ -364,6 +368,7 @@ public class ExcuseMePlayer extends Application{
 		@Override
 		public void run() {
 			Platform.runLater(() -> {
+				mainController.loadLyricView(nowPlaying, mediaPlayer.getCurrentTime().toSeconds());
 				if(timerCounter < length) {
 					if(++timerCounter % 4 == 0){
 						mainController.updateTimeLabels();

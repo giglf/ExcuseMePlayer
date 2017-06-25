@@ -11,6 +11,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
 import app.excuseme.ExcuseMePlayer;
+import app.excuseme.model.Lyric;
 import app.excuseme.model.MusicInfo;
 import app.excuseme.model.MusicLibrary;
 import app.excuseme.model.PlayListInfo;
@@ -48,6 +49,8 @@ public class MainController implements Initializable {
 	private VolumePopupController volumePopupController;
 	private Stage volumePopup;
 	
+	@FXML private Pane lyricShow;
+	
 	@FXML private Region frontSliderTrack;
 	@FXML private Region backSliderTrack;
 	@FXML private Slider timeSlider;
@@ -68,6 +71,8 @@ public class MainController implements Initializable {
 	
 	@FXML private ScrollPane playListView;
 	
+	private LyricController lyricController;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	
@@ -77,6 +82,15 @@ public class MainController implements Initializable {
 		
 		createVolumePopup();
 		channelSelectedSetting();
+		
+		try{
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource(Constants.FXML + "Lyric.fxml"));
+			Node view = loader.load();
+			lyricController = loader.getController();
+			lyricShow.getChildren().add(view);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		loopButton.setOnMouseClicked(x -> {
 			ExcuseMePlayer.toggleLoop();
@@ -143,7 +157,15 @@ public class MainController implements Initializable {
 		
 //		loadView(); 应该在导入完歌曲后再加载
 	}
+
 	
+	public void loadLyricView(MusicInfo nowPlaying, double time){
+		try{
+			lyricController.loadLyric(nowPlaying, time);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void loadView(){
 		

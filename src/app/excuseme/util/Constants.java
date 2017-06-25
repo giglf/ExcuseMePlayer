@@ -19,7 +19,7 @@ public final class Constants {
 //    public static final String USER_PROFILE_URL = BASE_URL + "/api/user/profile/";
 //    public static final String USER_MUSIC_URL = BASE_URL + "/api/user/music/";
 //    public static final String USER_HISTORY_URL = BASE_URL + "/api/user/history/";
-	
+	public static final String LYRIC_URL = "http://gecimi.com/api/lyric/";
     
     //APP属性常量
     public static final String APP_VERSION = "ExcuseMePlayer:develop";

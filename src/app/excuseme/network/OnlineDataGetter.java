@@ -11,6 +11,8 @@ import java.util.Collections;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.AudioHeader;
+
+import app.excuseme.model.LyricInfo;
 import app.excuseme.model.MusicInfo;
 import app.excuseme.util.CacheManager;
 import app.excuseme.util.Constants;
@@ -25,6 +27,36 @@ public class OnlineDataGetter {
 		connection.setRequestProperty("User-Agent", Constants.APP_VERSION);
 		InputStreamReader iReader=new InputStreamReader(connection.getInputStream());	
 		return iReader;
+	}
+	
+	/**
+	 * 传入歌曲信息，下载相应歌词，并记录歌词路径在歌曲类中
+	 * @param musicInfo
+	 * @return musicInfo with lyricPath
+	 */
+	public static MusicInfo lyricGetter(MusicInfo musicInfo){
+		try{
+			LyricInfo[] lyricInfos;
+			String title = musicInfo.getTitle();
+			String artist = musicInfo.getArtist();
+			lyricInfos = RequestLyrics.getAllLyricInfo(title, artist);
+			if (lyricInfos.length == 0) {
+				lyricInfos = RequestLyrics.getAllLyricInfo(title);
+			}
+			if(lyricInfos.length == 0){
+				musicInfo.setLyricPath(null);
+				return musicInfo;
+			}
+			//下载歌词
+			HttpDownload downloader = new HttpDownload(lyricInfos[0].getLrc());
+			downloader.setSaveLocation(CacheManager.getLyricsDir().toFile());
+			downloader.download();
+			while(!downloader.isDownloadFinished()){Thread.sleep(500);}
+			musicInfo.setLyricPath(downloader.getSaveFile().getAbsolutePath());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return musicInfo;
 	}
 	
 	/**

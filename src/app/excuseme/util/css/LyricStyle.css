@@ -1,0 +1,12 @@
+.ffplayer-lyric {
+	-fx-min-width: 500;
+    -fx-pref-width: 500;
+    -fx-max-width: 500;
+    -fx-min-height: 500;
+    -fx-pref-height: 500;
+    -fx-max-height: 500;
+    /* 
+    -fx-border-color: rgba(0, 0, 0, 1);
+    -fx-border-width: 3;
+    */
+}

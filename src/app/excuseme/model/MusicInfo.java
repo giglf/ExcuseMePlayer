@@ -38,6 +38,7 @@ public final class MusicInfo {
 	//添加属性
 	private String location;		//歌曲本地储存路径
 	private String length;			//歌曲时长
+	private String lyricPath;		//对应歌词文件的路径
 	
 	public MusicInfo(){}
 	
@@ -128,6 +129,14 @@ public final class MusicInfo {
 		long minutes = totalSeconds / 60;
 		long seconds = totalSeconds % 60;
 		return Long.toString(minutes) + ":" + (seconds<10? "0" + seconds : Long.toString(seconds));
+	}
+
+	public String getLyricPath() {
+		return lyricPath;
+	}
+
+	public void setLyricPath(String lyricPath) {
+		this.lyricPath = lyricPath;
 	}
 	
 	
