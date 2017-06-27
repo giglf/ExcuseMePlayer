@@ -158,7 +158,7 @@ public class LyricController implements Initializable{
 		
 		Text text = new Text(item.getContent());
 		text.setFont(Font.font("Arial", 24));
-		text.setFill(Color.WHITE);
+		text.setFill(Color.YELLOW);
 		text.setStrokeWidth(0.2);
 		text.setStroke(Color.BLUE);
 		hBox.getChildren().add(text);
@@ -178,7 +178,7 @@ public class LyricController implements Initializable{
 		Text text = new Text(item.getContent());
 		text.setFont(Font.font("Arial", 15 + i));
 		text.setOpacity(0.25*(i+1));
-		text.setFill(Color.GRAY);
+		text.setFill(Color.WHITE);
 		text.setStrokeWidth(0.2);
 		text.setStroke(Color.WHITE);
 		hBox.getChildren().add(text);

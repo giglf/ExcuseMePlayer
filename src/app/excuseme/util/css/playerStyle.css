@@ -8,7 +8,7 @@
 	-fx-background-image: url(../image/music.jpg);
 	-fx-background-size: stretch stretch;
     -fx-background-position: center center;
-    -fx-opacity: 0.8;
+   
 }
 #bottom{
 	-fx-background-image: url(../image/ly.jpg);
@@ -22,10 +22,40 @@
 	-fx-background-size: stretch stretch;
     -fx-background-position: center center;
 }
-
+#sp{
+	-fx-background-image: url(../image/ly.jpg);
+}
 #popupWindow{
 	-fx-background-image: url(../image/ly.jpg);
 	-fx-background-size: stretch stretch;
 	-fx-background-position: center center;
+}
+
+.controlPane:hover > .control,
+.toggleControlPane:hover > .control {
+    -fx-opacity: 0.5;
+}
+.controlPane:pressed > .control,
+.toggleControlPane:pressed > .control {
+   -fx-opacity: 0.25;
+}
+.toggleControlPane:active > .control {
+    -fx-fill: white;
+}
+.toggleControlPane:active {
+    -fx-background-color: rgb(153, 181, 230);
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 10;
+    -fx-scale-shape: true;
+    -fx-shape: "
+        M 100, 100
+        m -75, 0
+        a 75,75 0 1,0 150,0
+        a 75,75 0 1,0 -150,0
+        ";
+}
+Slider{
+	-fx-color: black;
 }
 
