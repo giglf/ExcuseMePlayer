@@ -11,7 +11,6 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
 import app.excuseme.ExcuseMePlayer;
-import app.excuseme.model.Lyric;
 import app.excuseme.model.MusicInfo;
 import app.excuseme.model.MusicLibrary;
 import app.excuseme.model.PlayListInfo;

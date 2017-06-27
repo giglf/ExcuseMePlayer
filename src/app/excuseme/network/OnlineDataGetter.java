@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -22,10 +22,10 @@ public class OnlineDataGetter {
 
 	
 	public static Reader doGet(String url)throws Exception{
-		URL localURL=new URL(url);
-		URLConnection connection=(HttpURLConnection) localURL.openConnection();
+		URL localURL = new URL(url);
+		HttpURLConnection connection = (HttpURLConnection) localURL.openConnection();
 		connection.setRequestProperty("User-Agent", Constants.APP_VERSION);
-		InputStreamReader iReader=new InputStreamReader(connection.getInputStream());	
+		InputStreamReader iReader=new InputStreamReader(connection.getInputStream());
 		return iReader;
 	}
 	
@@ -37,8 +37,8 @@ public class OnlineDataGetter {
 	public static MusicInfo lyricGetter(MusicInfo musicInfo){
 		try{
 			LyricInfo[] lyricInfos;
-			String title = musicInfo.getTitle();
-			String artist = musicInfo.getArtist();
+			String title = URLEncoder.encode(musicInfo.getTitle(), "utf-8");
+			String artist = URLEncoder.encode(musicInfo.getArtist(), "utf-8");
 			lyricInfos = RequestLyrics.getAllLyricInfo(title, artist);
 			if (lyricInfos.length == 0) {
 				lyricInfos = RequestLyrics.getAllLyricInfo(title);
