@@ -16,7 +16,7 @@
     -fx-background-position: center center;
 
 }
-#musiclist{
+#playListView{
 	-fx-background-color:ghostwhite;
 	-fx-background-image: url(../image/ly.jpg);
 	-fx-background-size: stretch stretch;

@@ -68,7 +68,7 @@ public class MainController implements Initializable {
 	@FXML private MenuButton channelSelect;
 	@FXML private ToggleButton chooseOnlineType;
 	
-	@FXML private ScrollPane playListView;
+	@FXML private Pane playListView;
 	
 	private LyricController lyricController;
 	
@@ -171,7 +171,7 @@ public class MainController implements Initializable {
 		try {
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource(Constants.FXML + "Songs.fxml"));
 			Node view = loader.load();
-			playListView.setContent(view);
+			playListView.getChildren().add(view);
 			
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -23,10 +23,8 @@ import javafx.scene.input.KeyCode;
 public class SongsController implements Initializable {
 
 	@FXML private TableView<MusicInfo> tableView;
-    @FXML private TableColumn<MusicInfo, Boolean> playingColumn;
     @FXML private TableColumn<MusicInfo, String> titleColumn;
     @FXML private TableColumn<MusicInfo, String> artistColumn;
-    @FXML private TableColumn<MusicInfo, String> albumColumn;
     @FXML private TableColumn<MusicInfo, String> lengthColumn;
     
     private MusicInfo selectedMusic;
@@ -37,24 +35,20 @@ public class SongsController implements Initializable {
     	tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     	
     	
-    	titleColumn.prefWidthProperty().bind(tableView.widthProperty().subtract(50).multiply(0.30));
-        artistColumn.prefWidthProperty().bind(tableView.widthProperty().subtract(50).multiply(0.30));
-        albumColumn.prefWidthProperty().bind(tableView.widthProperty().subtract(50).multiply(0.30));
-        lengthColumn.prefWidthProperty().bind(tableView.widthProperty().subtract(50).multiply(0.30));
+    	titleColumn.prefWidthProperty().bind(tableView.widthProperty().subtract(50).multiply(0.50));
+        artistColumn.prefWidthProperty().bind(tableView.widthProperty().subtract(50).multiply(0.35));
+        lengthColumn.prefWidthProperty().bind(tableView.widthProperty().subtract(50).multiply(0.35));
       
         titleColumn.setCellFactory(x -> new ClippedTableCell<>());
         artistColumn.setCellFactory(x -> new ClippedTableCell<>());
-        albumColumn.setCellFactory(x -> new ClippedTableCell<>());
         lengthColumn.setCellFactory(x -> new ClippedTableCell<>());
         
         titleColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getTitle()));
         artistColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getArtist()));
-        albumColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getAlbum()));
         lengthColumn.setCellValueFactory(itemData -> new ReadOnlyStringWrapper(itemData.getValue().getMinuteSecondLength()));
         
         titleColumn.setSortable(false);
         artistColumn.setSortable(false);
-        albumColumn.setSortable(false);
         lengthColumn.setSortable(false);
         
         ArrayList<MusicInfo> songs = ExcuseMePlayer.getPlayingList()!=null? ExcuseMePlayer.getPlayingList() : MusicLibrary.getLocalMusics();

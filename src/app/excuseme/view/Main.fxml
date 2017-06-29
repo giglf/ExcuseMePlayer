@@ -11,13 +11,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane id="allstyle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="862.0" stylesheets="@../util/css/playerStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.excuseme.view.MainController">
+<BorderPane id="allstyle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="862.0" stylesheets="@../util/css/playerStyle.css" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.excuseme.view.MainController">
    <right>
-      <ScrollPane id="sp" fx:id="playListView" BorderPane.alignment="CENTER"> 
-         <content> 
-            <VBox id="musiclist" prefHeight="382.0" prefWidth="263.0" /> 
-         </content> 
-      </ScrollPane> 
+      <Pane fx:id="playListView" prefHeight="384.0" prefWidth="250.0" /> 
    </right>
    <bottom>
       <BorderPane id="bottom" maxHeight="-Infinity" minHeight="-Infinity" opacity="0.96" prefHeight="50.0" styleClass="bottomBar">
@@ -197,6 +193,6 @@
       </HBox>
    </top>
    <center>
-      <Pane id="center" fx:id="lyricShow" prefHeight="200.0" prefWidth="519.0" BorderPane.alignment="CENTER" />
+      <Pane id="center" fx:id="lyricShow" prefHeight="200.0" prefWidth="594.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
