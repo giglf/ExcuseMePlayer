@@ -37,10 +37,12 @@ public class OnlineDataGetter {
 	public static MusicInfo lyricGetter(MusicInfo musicInfo){
 		try{
 			LyricInfo[] lyricInfos;
-			String title = musicInfo.getTitle();
-			String artist = musicInfo.getArtist();
-//			String title = URLEncoder.encode(musicInfo.getTitle(), "utf-8");
-//			String artist = URLEncoder.encode(musicInfo.getArtist(), "utf-8");
+//			String title = musicInfo.getTitle();
+//			String artist = musicInfo.getArtist();
+			String title = URLEncoder.encode(musicInfo.getTitle(), "utf-8");
+			String artist = URLEncoder.encode(musicInfo.getArtist(), "utf-8");
+			title = title.replaceAll("\\+", "%20");
+			artist = artist.replaceAll("\\+", "%20");
 			lyricInfos = RequestLyrics.getAllLyricInfo(title, artist);
 			if (lyricInfos.length == 0) {
 				lyricInfos = RequestLyrics.getAllLyricInfo(title);
