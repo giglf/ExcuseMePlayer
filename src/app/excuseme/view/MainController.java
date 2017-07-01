@@ -107,7 +107,10 @@ public class MainController implements Initializable {
 			ExcuseMePlayer.setIsNetworkType(chooseOnlineType.isSelected());
 			if(chooseOnlineType.isSelected()){
 				boolean updateSuccess = ExcuseMePlayer.channelUpdateAndPlay();
-				if(!updateSuccess) chooseOnlineType.setSelected(false);
+				if(!updateSuccess){
+					chooseOnlineType.setSelected(false);
+					ExcuseMePlayer.playingLocalMusic();
+				}
 			} else{
 				ExcuseMePlayer.playingLocalMusic();
 			}

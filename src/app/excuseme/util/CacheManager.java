@@ -23,7 +23,7 @@ public class CacheManager {
 		try{
 			if(tmpFileDir==null){
 				String tDir = System.getProperty("java.io.tmpdir");
-				File tmpDir = new File(tDir + "ExcuseMePlayer");
+				File tmpDir = new File(tDir + "/ExcuseMePlayer");
 				tmpDir.mkdirs();
 				tmpFileDir = tmpDir.toPath();
 			}
