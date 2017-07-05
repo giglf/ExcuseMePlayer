@@ -78,7 +78,6 @@ https://github.com/DouFM/wang_fm/blob/master/doc/api.md
    可以通过该链接获取歌曲
 
 
-
 ---
 
 ### **关于歌词**
@@ -131,3 +130,5 @@ Official document http://doc.gecimi.com/en/latest/#indices-and-tables
   * 如果此时没有导入，直接关闭，程序会退出
 * 本地音乐导入过后，将会在当前目录生成library.xml的文件，用于储存本地音乐的信息，想要重新导入只需要把该文件删除即可。
 * 每次退出会默认删除所有tmp目录下的缓存文件，鉴于javafx存在的一些bug，曾播放过的音频缓存文件无法解除占用，导致无法删除，此时可通过手动删除抑或等下次打开ExcuseMePlayer再关闭时删除。
+* 如果下载过程网络出现问题而断开，程序会崩溃（未修复）
+* 使用终端打开ExcuseMePlayer的话，当歌曲下载完成会有完成提示显示。
